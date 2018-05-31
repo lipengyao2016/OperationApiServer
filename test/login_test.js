@@ -24,18 +24,19 @@ let options = {
 };
 
 
-describe('GoodsPackage Test Case:',function () {
-    describe('GoodsPackage test case:',  function (){
-        it('create a GoodsPackage test case:',  function (){
+describe('Login Test Case:',function () {
+    describe('Login test case:',  function (){
+        it('create a Login test case:',  function (){
             //this.timeout(0);
             let  body = {
-                //packageId: '87547878',
-                deliveryHref: 'http://192.168.7.150:5703/api/v1.0.0/customers/5EPcGYEQnOo7Hxdg9dU5ow',
-                merchantHref:'http://192.168.7.150:5006/api/v1.0.0/merchants/zTLmcS8CK0qdQC4oJRbVtw',
-                deliverySource: 'idleFish',
+                "applicationName": "LaiKoo-Platform",     // 系统名称, 莱客平台：'LaiKoo-Platform',
+                // 莱客管家：'LaiKoo-Butler',莱客收银：'LaiKoo-CashRegister'
+                "merchantNumber": "90000017",    // 商户编号
+                "key": "admin",                 // 账户名、账号、手机号
+                "value": new Buffer("abcdef12345").toString('base64) // 密码 (注意，该值为原密码的base64编码)
             };
 
-            return request.post(`${url}/goodsPackages`,body,options)
+            return request.post(`/Logins`,body,options)
                 .then(function ({statusCode,body,headers,request}) {
                     expect(statusCode).to.equal(201);
                     console.log('statusCode:',statusCode);
@@ -43,14 +44,14 @@ describe('GoodsPackage Test Case:',function () {
                 })
         });
 
-        it('list a GoodsPackage test case:',  function (){
+        it('list a Login test case:',  function (){
             //this.timeout(0);
             let  qs = {
               //  packageId: '2524626326182938',
                 //merchantHref:'http://192.168.7.210:5006/api/v1.0.0/merchants/aR5Uj5qbZw7yjiP0zDqmyQ',
             };
 
-            return request.get(`${url}/goodsPackages`,qs,options)
+            return request.get(`${url}/Logins`,qs,options)
                 .then(function ({statusCode,body,headers,request}) {
                     console.log('statusCode:',statusCode);
                     console.log('body:',JSON.stringify(body,null,2));
@@ -60,7 +61,7 @@ describe('GoodsPackage Test Case:',function () {
         });
 
 
-        it('get a GoodsPackage details test case:',  function (){
+        it('get a Login details test case:',  function (){
             //this.timeout(0);
             let  qs = {
                 packageId: '2524822829818367',

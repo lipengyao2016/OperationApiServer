@@ -46,15 +46,15 @@ app.use(bodyparser({jsonLimit: '10mb'}));
     if(!ctx.query.token && !ctx.header.authorization)
     {
         console.log(' no token in header and query!!!');
-         await  next();
+        //await  next();
 
-      /!*  let error = new Error();
+        let error = new Error();
         error.name = 'no token';
         error.code = 9999;
         error.message = 'no token';
         error.description = '';
         ctx.status = 401;
-        ctx.body = error;*!/
+        ctx.body = error;
     }
     else
     {
@@ -91,8 +91,7 @@ app.use(async (ctx,next)=>{
     }
 
     await next();
-});
-*/
+});*/
 
 app.use(async (ctx,next)=>{
     if(ctx.method == 'POST' || ctx.method == 'PUT'){
