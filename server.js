@@ -128,8 +128,17 @@ app.use(convert(betterproxy('localhosxxxt:60002', {
         //proxyReqOpts.path = serverPath;
 
         proxyReqOpts.host = 'localhost';
+        proxyReqOpts.port = 60002;
+        if(config[serverName])
+        {
+            proxyReqOpts.port = config[serverName].port;
+            proxyReqOpts.host = config[serverName].host;
+        }
 
-        if(serverName == 'menuServer')
+        console.log(' httpProxy url:' + urlData.path + ',serverName:' + serverName + ',host:' + proxyReqOpts.host
+            + ',port:' + proxyReqOpts.port);
+
+/*        if(serverName == 'menuServer')
         {
             proxyReqOpts.port = 6001;
         }
@@ -140,7 +149,7 @@ app.use(convert(betterproxy('localhosxxxt:60002', {
         else if(serverName == 'userServer')
         {
             proxyReqOpts.port = 6003;
-        }
+        }*/
 
         return proxyReqOpts;
     }

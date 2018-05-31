@@ -45,14 +45,34 @@ let config = {
         password : ''
     },
 
-    GoodsServer:{
-        host: '192.168.7.150',
-        port: 5702
+    userServer:{
+        host: '192.168.7.151',
+        port: 6003
     },
 
-    DeliveryOrderServer:{
-        host: '192.168.7.150',
-        port: 5701
+    roleServer:{
+        host: '192.168.7.151',
+        port: 6002
+    },
+
+    accountServer:{
+        host: '192.168.7.151',
+        port: 6000
+    },
+
+    menuServer:{
+        host: '192.168.7.151',
+        port: 6001
+    },
+
+    merchantServer:{
+        host: '192.168.7.151',
+        port: 6004
+    },
+
+    platformBusiServer:{
+        host: '192.168.7.151',
+        port: 6101
     },
 
     ThirdServerByCommonConfig: ['GoodsServer','DeliveryOrderServer'],
