@@ -6,8 +6,12 @@
 资源列表：
 
 此接口为网关接口，包含了两大块内容:
+
+
    RESTApi(标准接口)
      1.透传原有的REST风格接口，做智能路由。
+
+
    BusiQueryApi(业务查询)
      2.做graphQL的业务查询接口
 
@@ -19,7 +23,7 @@ RESTApi资源是指透传原有的REST风格接口，做智能路由，只需要
 
 具体的服务名列表如下:
 
- userServer:{
+     userServer:{
         port: 6003
     },
 
