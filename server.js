@@ -85,11 +85,11 @@ app.use(async (ctx,next)=>{
     {
         console.log('tokenInfo:',ctx.state.user);
        // utils.checkRequiredParams(ctx.state.user,['user','merchant']);
-        let {user,merchant,application,roles}=ctx.state.user;
+        let {user,merchant,application,role}=ctx.state.user;
         let userHref = URIParser.baseResourcesURI(config.serverIndexs.User_Server,'users') + `/${user.uuid}`;
         let merchantHref = URIParser.baseResourcesURI(config.serverIndexs.Merchant_Server,'merchants')+ `/${merchant.uuid}`;
         let applicationHref = URIParser.baseResourcesURI(config.serverIndexs.Account_Server,'applications')+ `/${application.uuid}`;
-        let roleHref =  URIParser.baseResourcesURI(config.serverIndexs.Role_Server,'roles')+ `/${roles.uuid}`;
+        let roleHref =  URIParser.baseResourcesURI(config.serverIndexs.Role_Server,'roles')+ `/${role.uuid}`;
 
         ctx.jwt = _.cloneDeep(ctx.state.user);
         ctx.jwt.userUUID = user.uuid;
