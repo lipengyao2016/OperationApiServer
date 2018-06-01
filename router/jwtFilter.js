@@ -120,6 +120,13 @@ class JwtFilter{
 
         let bMatch = false;
         let addParams = [] ;
+
+/*        let pathArrays = path.split('/');
+        let action = pathArrays[pathArrays.length-1];*/
+
+
+
+
         for(var key in ResourceUrlParamMapTable)
         {
             let resourceName = ResourceUrlParamMapTable[key].resourceName;
@@ -137,13 +144,13 @@ class JwtFilter{
         {
             if(ctx.method == 'POST' || ctx.method == 'PUT')
             {
-                console.log(`body:\n${JSON.stringify(ctx.request.body,null,2)}`);
+                console.log(`jwt filter prev body:\n${JSON.stringify(ctx.request.body,null,2)}`);
 
                 this.addAttrIfNotExist(ctx.request.body,addParams,ctx.jwt);
             }
             else if(ctx.method == 'GET')
             {
-                console.log(`query:\n${JSON.stringify(ctx.query,null,2)}`);
+                console.log(`jwt filter prev query:\n${JSON.stringify(ctx.query,null,2)}`);
 
                 this.addAttrIfNotExist(ctx.query,addParams,ctx.jwt);
             }

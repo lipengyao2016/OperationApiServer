@@ -21,7 +21,7 @@ let options = {
 
 describe('menuGroup Test Case:',()=>{
     let menuGroupTestCase = {
-        name: '测试管理zz',
+        name: '测试管理gg',
         description: 'datagg',
         uiOrder: 3,
       //  upLevelMenuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/eTUA8Knx9e0OMumDevYQ7g',
@@ -36,7 +36,7 @@ describe('menuGroup Test Case:',()=>{
 
     tenantURL = url ;
 
-    //menuGroupUUID = 'SAVkeDwGSBpGRTwOWRLDLQ';
+    menuGroupUUID = 'mqu1vREtounrsH1IuqXQeQ';
 
     describe('create test case:',  ()=>{
         it('success create an menuGroup',  ()=> {
@@ -53,7 +53,7 @@ describe('menuGroup Test Case:',()=>{
         it('success retrieve an menuGroup  ', function () {
             //this.timeout(0);
 
-            return request.get(`${tenantURL}/menuGroups/${menuGroupUUID}`,{}).then( ( { statusCode,body,headers,request} )=>{
+            return request.get(`${tenantURL}/menuServer/api/v1/menuGroups/${menuGroupUUID}`,{},options).then( ( { statusCode,body,headers,request} )=>{
 
                 console.log('menuGroups test retrieve   :' + JSON.stringify(body,null,2));
 
@@ -70,8 +70,8 @@ describe('menuGroup Test Case:',()=>{
            // menuGroupUUID = '7O1PwyXNuUOEXxvRfvbyrQ';
             let updateInfo = {};
             //menuGroupUUID = 'ZPkd6sThTsgNq8M3WzPQnQ';
-            updateInfo.status = 'created';
-            return request.post(`${tenantURL}/menuGroups/${menuGroupUUID}`,updateInfo).then( ( { statusCode,body,headers,request} )=>{
+            updateInfo.description = 'single';
+            return request.post(`${tenantURL}/menuServer/api/v1/menuGroups/${menuGroupUUID}`,updateInfo,options).then( ( { statusCode,body,headers,request} )=>{
 
                 console.log('menuGroups test update   :' + JSON.stringify(body,null,2));
 
@@ -86,7 +86,7 @@ describe('menuGroup Test Case:',()=>{
         it('list menuGroups  ', function () {
             //this.timeout(0);
             let qs = {
-               // name:'*good*',
+                name:'*good*',
                 //uuid:['3UCHOeNl5tVmN83fkyQfNQ','V1bg0v8SlXKs8OXApykNzg'],
                 /*               offset:0,
                                limit:1,
@@ -163,8 +163,6 @@ describe('menuGroup Test Case:',()=>{
                 // applicationHref:'http://localhost:5000/api/v1.0.0/applications/CQZNqVpEbFxyZ7ayW7x2yA',\
                 menuOrganizationHref : 'http://localhost:6001/api/v1.0.0/menuOrganizations/0vjiGKZ9dvxpoufELryZQw',
             };
-
-
 
             return request.get(`${tenantURL}/treeMenuGroups`,qs).then( ( { statusCode,body,headers,request} )=>{
 

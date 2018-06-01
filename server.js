@@ -102,6 +102,8 @@ app.use(async (ctx,next)=>{
         ctx.jwt.merchantHref = merchantHref;
         ctx.jwt.applicationHref = applicationHref;
         ctx.jwt.roleHref= roleHref;
+        ctx.jwt.applicationName = application.name;
+        ctx.jwt.merchantNumber = merchant.number;
         console.log(`merchant: ${ctx.jwt.merchantUUID} , user: ${ctx.jwt.userUUID}`);
 
         await  jwtFilter.filter(ctx);
