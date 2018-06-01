@@ -21,7 +21,7 @@ let options = {
 
 describe('menuGroup Test Case:',()=>{
     let menuGroupTestCase = {
-        name: '测试管理gg',
+        name: '测试管理kk',
         description: 'datagg',
         uiOrder: 3,
       //  upLevelMenuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/eTUA8Knx9e0OMumDevYQ7g',

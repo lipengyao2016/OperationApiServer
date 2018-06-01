@@ -24,6 +24,17 @@ var ResourceUrlParamMapTable= {
             }
         ],
     },
+    'treeMenus': {
+        addParams: [
+            {
+                key: 'applicationHref',
+                upKey: ''
+            }
+        ],
+    },
+
+
+
     'roles': {
         addParams: [
             {

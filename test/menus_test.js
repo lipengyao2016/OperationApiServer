@@ -123,10 +123,10 @@ describe('menus Test Case:',()=>{
         it('list treeMenus  ', function () {
             //this.timeout(0);
             let qs = {
-                applicationHref:'http://localhost:5000/api/v1.0.0/applications/BQZNqVpEbFxyZ7ayW7x2yA',
+              //  applicationHref:'http://localhost:5000/api/v1.0.0/applications/BQZNqVpEbFxyZ7ayW7x2yA',
              //   menuOrganizationHref : 'http://localhost:6001/api/v1.0.0/menuOrganizations/rIdUW07jGttn5VNGcPvnuQ',
             };
-            return request.get(`${url}/treeMenus`,qs).then( ( { statusCode,body,headers,request} )=>{
+            return request.get(`${url}/menuServer/api/v1/treeMenus`,qs,options).then( ( { statusCode,body,headers,request} )=>{
 
                 console.log('menus test treeMenus   :' + JSON.stringify(body));
 

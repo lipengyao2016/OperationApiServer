@@ -16,18 +16,20 @@ let options = {
     headers: header,
 };
 
-
-
-describe('users Test Case:',()=>{
-    let usersTestCase =
-        {
-        name: '王菲',
+let usersTestCase =
+    {
+        name: '王文',
         //departmentHref:'http://localhost:6003/api/v1.0.0/departments/02HYJGTmTSzXh5vUogXWoQ',
 
         roleHref:'http://192.168.7.26:6002/api/v1.0.0/roles/drxoJWYKGWcO68I0QSKxIQ',
 
-       // accountHref:'http://localhost:6002/api/v1.0.0/accounts/aDku0D9gZ2bHeJS5jyL5YQ',
+        // accountHref:'http://localhost:6002/api/v1.0.0/accounts/aDku0D9gZ2bHeJS5jyL5YQ',
     };
+
+
+
+describe('users Test Case:',()=>{
+
 
 
     let applicationUUID = 'AppUUIDForTestCase';
@@ -41,6 +43,7 @@ describe('users Test Case:',()=>{
     usersUUID = 'f9qXOQgFx8YD9xDlGhRDWw';
 
     describe('create test case:',  ()=>{
+
         it('success create an users',  ()=> {
             //this.timeout(0);
 

@@ -89,11 +89,8 @@ app.use(async (ctx,next)=>{
         let userHref = URIParser.baseResourcesURI(config.serverIndexs.User_Server,'users') + `/${user.uuid}`;
         let merchantHref = URIParser.baseResourcesURI(config.serverIndexs.Merchant_Server,'merchants')+ `/${merchant.uuid}`;
         let applicationHref = URIParser.baseResourcesURI(config.serverIndexs.Account_Server,'applications')+ `/${application.uuid}`;
-        let roleHref = '';
-        if(roles.length > 0)
-        {
-            roleHref = URIParser.baseResourcesURI(config.serverIndexs.Role_Server,'roles')+ `/${roles[0].uuid}`;
-        }
+        let roleHref =  URIParser.baseResourcesURI(config.serverIndexs.Role_Server,'roles')+ `/${roles.uuid}`;
+
         ctx.jwt = _.cloneDeep(ctx.state.user);
         ctx.jwt.userUUID = user.uuid;
         ctx.jwt.merchantUUID = merchant.uuid;
