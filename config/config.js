@@ -1,5 +1,8 @@
 "use strict";
 const fs = require('fs');
+
+let externHost = 'localhost';
+
 let config = {
     //服务器配置
     server: {
@@ -46,41 +49,51 @@ let config = {
     },
 
     userServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6003
     },
 
     roleServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6002
     },
 
     accountServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6000
     },
 
     menuServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6001
     },
 
     merchantServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6004
     },
 
     platformBusiServer:{
-        host: '192.168.7.151',
+        host: externHost,
         port: 6101
     },
 
-    ThirdServerByCommonConfig: ['GoodsServer','DeliveryOrderServer'],
+    authServer:{
+        host: externHost,
+        port: 6100
+    },
+
+    ThirdServerByCommonConfig: ['userServer','roleServer','accountServer','menuServer','merchantServer','platformBusiServer','authServer'],
 
     serverIndexs:
         {
-            Goods_Server : 0,
-            DeliveryOrder_Server:  1,
+            User_Server : 0,
+            Role_Server:  1,
+            Account_Server:  2,
+            Menu_Server:  3,
+            Merchant_Server:  4,
+            PlatformBusi_Server:  5,
+            auth_Server:  6,
         },
 
     cache : {
@@ -100,6 +113,7 @@ try {
     if(ThirdServer_domain && config.ThirdServerByCommonConfig){
         config.ThirdServerByCommonConfig.map( key=>{
             config[key].host=ThirdServer_domain;
+            console.log('server:' + key + ',host:' + config[key].host + ',port:' + config[key].port);
         } );
     }
     if( knex_connection && config.knex.connection ){

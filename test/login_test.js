@@ -31,14 +31,14 @@ describe('Login Test Case:',function () {
             let  body = {
                 "applicationName": "LaiKoo-Platform",     // 系统名称, 莱客平台：'LaiKoo-Platform',
                 // 莱客管家：'LaiKoo-Butler',莱客收银：'LaiKoo-CashRegister'
-                "merchantNumber": "90000017",    // 商户编号
-                "key": "admin",                 // 账户名、账号、手机号
-                "value": new Buffer("abcdef12345").toString('base64) // 密码 (注意，该值为原密码的base64编码)
+                "merchantNumber": "900001",    // 商户编号
+                "key": "liuzong",                 // 账户名、账号、手机号
+                "value": new Buffer("888888").toString('base64')
             };
 
-            return request.post(`/Logins`,body,options)
+            return request.post('http://192.168.7.151:6100/api/v1.0.0/login',body,options)
                 .then(function ({statusCode,body,headers,request}) {
-                    expect(statusCode).to.equal(201);
+                    expect(statusCode).to.equal(200);
                     console.log('statusCode:',statusCode);
                     console.log('body:',JSON.stringify(body,null,2));
                 })

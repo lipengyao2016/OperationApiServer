@@ -14,6 +14,6 @@ let options = {
         'Content-Type': 'application/json;charset=UTF-8',
     }
 };
-exports.url = `http://${options.host}:${options.port}/api/v1`;
+exports.url = `http://${options.host}:${options.port}`;
 
 
