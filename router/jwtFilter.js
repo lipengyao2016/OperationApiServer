@@ -7,82 +7,76 @@ const qs = require('querystring');
 
 //new RegExp('^/.*/menuGroups$'),
 
-var ResourceUrlParamMapTable= [
-    {
-        addParams:[
+var ResourceUrlParamMapTable= {
+    'menuGroups': {
+        addParams: [
             {
-                key:'applicationHref',
-                upKey:''
-            }
-            ],
-        resourceName: 'menuGroups',
-    },
-    {
-        addParams:[
-            {
-                key:'applicationHref',
-                upKey:''
-            }
-                ],
-        resourceName: 'menus',
-    },
-    {
-        addParams:[
-            {
-                key:'applicationHref',
-                upKey:''
-            },
-            {
-                key:'merchantHref',
-                upKey:''
-            }
-                ],
-        resourceName: 'roles',
-    },
-    {
-        addParams:[
-            {
-                key:'applicationHref',
-                upKey:''
-            },
-            {
-            key:'merchantHref',
-             upKey:''
+                key: 'applicationHref',
+                upKey: ''
             }
         ],
-        resourceName: 'users',
     },
-    {
-        addParams:[
+    'menus': {
+        addParams: [
             {
-                key:'applicationHref',
-                upKey:''
+                key: 'applicationHref',
+                upKey: ''
             }
-            ],
-        resourceName: 'roleDetails',
+        ],
     },
-    {
-        addParams:[
+    'roles': {
+        addParams: [
             {
-            key:'applicationHref',
-            upKey:'user'
+                key: 'applicationHref',
+                upKey: ''
             },
             {
-                key:'merchantHref',
-                upKey:'user'
+                key: 'merchantHref',
+                upKey: ''
+            }
+        ],
+    },
+    'users': {
+        addParams: [
+            {
+                key: 'applicationHref',
+                upKey: ''
             },
             {
-                key:'applicationName',
-                upKey:'account'
+                key: 'merchantHref',
+                upKey: ''
+            }
+        ],
+    },
+    'roleDetails': {
+        addParams: [
+            {
+                key: 'applicationHref',
+                upKey: ''
+            }
+        ],
+    },
+    'registerUser': {
+        addParams: [
+            {
+                key: 'applicationHref',
+                upKey: 'user'
             },
             {
-                key:'merchantNumber',
-                upKey:'account'
+                key: 'merchantHref',
+                upKey: 'user'
+            },
+            {
+                key: 'applicationName',
+                upKey: 'account'
+            },
+            {
+                key: 'merchantNumber',
+                upKey: 'account'
             },
         ],
-        resourceName: 'registerUser',
     },
-];
+};
 
 
 
@@ -112,7 +106,7 @@ class JwtFilter{
 
     async filter(ctx){
 
-        console.log('JwtFilter->filter  begin :');
+
 
         let url = ctx.url;
 
@@ -121,16 +115,19 @@ class JwtFilter{
         let bMatch = false;
         let addParams = [] ;
 
-/*        let pathArrays = path.split('/');
-        let action = pathArrays[pathArrays.length-1];*/
+        let pathArrays = path.split('/');
+        let action = '';
+        if(pathArrays.length > 0)
+        {
+            action = pathArrays[pathArrays.length-1];
+        }
 
+        console.log('JwtFilter->filter  begin path:' + path + ',action:' + action);
 
-
-
-        for(var key in ResourceUrlParamMapTable)
+/*        for(var key in ResourceUrlParamMapTable)
         {
             let resourceName = ResourceUrlParamMapTable[key].resourceName;
-            let reqUrls =`^/.*/${resourceName}$`;
+            let reqUrls =`^/.*!/${resourceName}$`;
 
             if(new RegExp(reqUrls).test(path))
             {
@@ -138,6 +135,12 @@ class JwtFilter{
                 addParams = ResourceUrlParamMapTable[key].addParams;
                 break;
             }
+        }*/
+
+        if(ResourceUrlParamMapTable[action])
+        {
+            bMatch = true;
+            addParams = ResourceUrlParamMapTable[action].addParams;
         }
 
         if(bMatch)

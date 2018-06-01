@@ -86,7 +86,7 @@ describe('menuGroup Test Case:',()=>{
         it('list menuGroups  ', function () {
             //this.timeout(0);
             let qs = {
-                name:'*good*',
+                name:'*测试管理*',
                 //uuid:['3UCHOeNl5tVmN83fkyQfNQ','V1bg0v8SlXKs8OXApykNzg'],
                 /*               offset:0,
                                limit:1,
