@@ -36,7 +36,7 @@ describe('Login Test Case:',function () {
                 "value": new Buffer("888888").toString('base64')
             };
 
-            return request.post('http://192.168.7.151:6100/api/v1.0.0/login',body,options)
+            return request.post('http://192.168.7.26:6100/api/v1.0.0/login',body,options)
                 .then(function ({statusCode,body,headers,request}) {
                     expect(statusCode).to.equal(200);
                     console.log('statusCode:',statusCode);

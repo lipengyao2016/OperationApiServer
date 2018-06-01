@@ -5,16 +5,9 @@ const expect = require('chai').expect;
 const _ = require('lodash');
 const common = require('./common');
 const url = common.url;
-const request = require('common-request').request;
-
-let header =
-    {
-        "authorization": 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InV1aWQiOiJXdDRjMVZ4alJNQ3lHakhGdk5yZlhRIiwibmFtZSI6ImxpdXpvbmcifSwibWVyY2hhbnQiOnsidXVpZCI6IjBCbEFRaTNCWEFFRUV1cmhZa1ZjZ0EiLCJuYW1lIjoi5bmz5Y-w5byA5Y-R5ZWGIiwibnVtYmVyIjoiOTAwMDAxIn0sImFwcGxpY2F0aW9uIjp7InV1aWQiOiJTYWQ5WUhEWGhtOWN5TWVvTnZyMmlnIiwibmFtZSI6IkxhaUtvby1QbGF0Zm9ybSJ9LCJyb2xlcyI6W3sidXVpZCI6ImNySXVaOEFjVUhCZEpBeFZWU2xISFEifV0sImlhdCI6MTUyNzc5Nzg1NiwiZXhwIjoxNTI3ODQxMDU2fQ.aeyGMGQCwjSHpbV6L_-iQkqJ-vENnjNVTppaV4FieRV5bs_sSeqWh0Q7CGe-P8NFdAHQDzAcCxEbQ2Pw9PMWdyBSlM2omkiB-OJXoHGEIE0Ljkq4hzuArIAYvKVtFw-HjTlhpNrsofzulMa3M9xamrAkkhcqLImwhY44eaLTHr0',
-    };
-
-let options = {
-    headers: header,
-};
+const  requestHelper= require('./requestHelper').requestHelper;
+const devUtils = require('develop-utils');
+let options = {};
 
 
 describe('roles Test Case:',()=>{
@@ -39,7 +32,7 @@ describe('roles Test Case:',()=>{
     let tenantUUID = null;
     let tenantURL = null;
 
-    tenantURL = url ;
+    tenantURL = url + '/roleServer/api/v1' ;
 
   //  rolesUUID = '4po7G4eCiSztrYzqsyLisg';
 
@@ -47,11 +40,13 @@ describe('roles Test Case:',()=>{
         it('success create an roles',  ()=> {
             //this.timeout(0);
 
-            return request.post(`${tenantURL}/roleServer/api/v1/roles`,rolesTestCase,options).then( ( {statusCode, body, headers, request} )=>{
+            return requestHelper.post(`${tenantURL}/roles`,rolesTestCase,options).then( ( {statusCode, body, headers, requestHelper} )=>{
                 expect(statusCode).to.equal(201);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
                 expect(body.name).to.equal(rolesTestCase.name);
 
+
+                rolesUUID = devUtils.getLastResourceUUIDInURL(body.href);
 
                 console.log('roless test  create  rolesUUID  :' + rolesUUID +
                     ' body:'+JSON.stringify(body,null,2));
@@ -62,7 +57,7 @@ describe('roles Test Case:',()=>{
         it('success retrieve an roles  ', function () {
             //this.timeout(0);
 
-            return request.get(`${tenantURL}/roles/${rolesUUID}`,{}).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/roles/${rolesUUID}`,{}).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('roless test retrieve   :' + JSON.stringify(body,null,2));
 
@@ -76,7 +71,6 @@ describe('roles Test Case:',()=>{
     describe('update test case:', function () {
         it('success update an roles', function () {
             //this.timeout(0);
-            rolesUUID = 'QFcXILgnqpkeGR8kb9WAxA';
             let updateInfo = {
                 name:'经理kk',
                 permissions:[
@@ -93,14 +87,12 @@ describe('roles Test Case:',()=>{
                 ],
             };
             updateInfo.description = 'lpy descript';
-            return request.post(`${tenantURL}/roles/${rolesUUID}`,updateInfo).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.post(`${tenantURL}/roles/${rolesUUID}`,updateInfo).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('roless test update   :' + JSON.stringify(body,null,2));
 
                 expect(statusCode).to.equal(200);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
-                expect(body.description).to.equal(updateInfo.description);
-                //expect(uriReg.applicationURIReg.test(res.headers['location'])).to.be.true;
             });
         });
     });
@@ -118,7 +110,7 @@ describe('roles Test Case:',()=>{
                 createdAt:'[,2018-04-18 18:13:28]'*/
             };
 
-            return request.get(`${tenantURL}/roles/listAll`,qs).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/roles/listAll`,qs).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('roless test list   :' + JSON.stringify(body,null,2));
 
@@ -141,13 +133,12 @@ describe('roles Test Case:',()=>{
                                limit:1,
                                createdAt:'[,2018-04-18 18:13:28]'*/
             };
-            return request.get(`${tenantURL}/roleServer/api/v1/roles`,qs,options).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/roles`,qs,options).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('roless test list   :' + JSON.stringify(body,null,2));
 
                 expect(statusCode).to.equal(200);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
-                //expect(uriReg.applicationURIReg.test(res.headers['location'])).to.be.true;
             });
         });
 
@@ -163,7 +154,7 @@ describe('roles Test Case:',()=>{
 
             };
 
-            return request.get(`${url}/platformBusiServer/api/v1/roleDetails`,qs,options).then(function ({statusCode,body,headers,request}) {
+            return requestHelper.get(`${url}/platformBusiServer/api/v1/roleDetails`,qs,options).then(function ({statusCode,body,headers,requestHelper}) {
                 console.log('body:',JSON.stringify(body,null,2));
                 expect(statusCode).to.equal(200);
             })
@@ -176,11 +167,11 @@ describe('roles Test Case:',()=>{
         it('success delete an roles', function () {
             //this.timeout(0);
 
-            rolesUUID = 'BUNDhIeJCQvGbu6Bo4JEJQ';
-         /*   return request.delete(`${tenantURL}/roles/${rolesUUID}`).then( ( { statusCode,body,headers,request} )=>{
+
+            return requestHelper.delete(`${tenantURL}/roles/${rolesUUID}`).then( ( { statusCode,body,headers,requestHelper} )=>{
                 console.log('roless test delete   :' + JSON.stringify(body,null,2));
                 expect(statusCode).to.equal(204);
-            });*/
+            });
         });
     });
 });

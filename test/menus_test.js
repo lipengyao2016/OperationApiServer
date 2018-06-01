@@ -5,23 +5,18 @@ const expect = require('chai').expect;
 const _ = require('lodash');
 const common = require('./common');
 const url = common.url;
-const request = require('common-request').request;
+const  requestHelper= require('./requestHelper').requestHelper;
+const devUtils = require('develop-utils');
+let options = {};
 
-let header =
-    {
-        "authorization": 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InV1aWQiOiJXdDRjMVZ4alJNQ3lHakhGdk5yZlhRIiwibmFtZSI6ImxpdXpvbmcifSwibWVyY2hhbnQiOnsidXVpZCI6IjBCbEFRaTNCWEFFRUV1cmhZa1ZjZ0EiLCJuYW1lIjoi5bmz5Y-w5byA5Y-R5ZWGIiwibnVtYmVyIjoiOTAwMDAxIn0sImFwcGxpY2F0aW9uIjp7InV1aWQiOiJTYWQ5WUhEWGhtOWN5TWVvTnZyMmlnIiwibmFtZSI6IkxhaUtvby1QbGF0Zm9ybSJ9LCJyb2xlcyI6W3sidXVpZCI6ImNySXVaOEFjVUhCZEpBeFZWU2xISFEifV0sImlhdCI6MTUyNzc5Nzg1NiwiZXhwIjoxNTI3ODQxMDU2fQ.aeyGMGQCwjSHpbV6L_-iQkqJ-vENnjNVTppaV4FieRV5bs_sSeqWh0Q7CGe-P8NFdAHQDzAcCxEbQ2Pw9PMWdyBSlM2omkiB-OJXoHGEIE0Ljkq4hzuArIAYvKVtFw-HjTlhpNrsofzulMa3M9xamrAkkhcqLImwhY44eaLTHr0',
-    };
 
-let options = {
-    headers: header,
-};
 
 
 describe('menus Test Case:',()=>{
     let menusTestCase =
         {
-        name: '插件管理',
-        menuId: '64D05948-36AD-41A0-AF78-75FA23D657C5',
+        name: '插件管理qq',
+        menuId: '64D05948-36AD-41A0-AF78-75FA23D657C1',
         uiOrder:4,
         // menuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/6cVizWBnkIRlGHCttOmspg',
 
@@ -29,12 +24,12 @@ describe('menus Test Case:',()=>{
 
          operators:[
              {
-                 name: '插件列表',
-                 operatorId:'6129CC59-116C-4DD5-9BB2-74A83712F86A',
+                 name: '插件列表qq',
+                 operatorId:'6129CC59-116C-4DD5-9BB2-74A83712F86A2',
              },
              {
-                 name: '新增插件',
-                 operatorId:'6a7da35f-d2fa-4b6c-9abc-4703db60ea3f',
+                 name: '新增插件qq',
+                 operatorId:'6a7da35f-d2fa-4b6c-9abc-4703db60ea3f3',
              },
          ],
     };
@@ -46,7 +41,7 @@ describe('menus Test Case:',()=>{
     let tenantUUID = null;
     let tenantURL = null;
 
-    tenantURL = url /*+ '/directories' + '/zbDG5Ul3MHzHOEBFYyIalQ' + '/menusPackages' + '/n97eIgDCIO6wecGkvc19UQ'*/ ;
+    tenantURL = url + '/menuServer/api/v1' ;
 
     //menusUUID = 'SAVkeDwGSBpGRTwOWRLDLQ';
 
@@ -54,9 +49,11 @@ describe('menus Test Case:',()=>{
         it('success create an menus',  ()=> {
             //this.timeout(0);
 
-            return request.post(`${url}/menuServer/api/v1/menus`,menusTestCase,options).then( ( {statusCode, body, headers, request} )=>{
+            return requestHelper.post(`${tenantURL}/menus`,menusTestCase,options).then( ( {statusCode, body, headers, requestHelper} )=>{
                 expect(statusCode).to.equal(201);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
+
+                menusUUID = devUtils.getLastResourceUUIDInURL(body.href);
 
                 console.log('menus test  create  menusUUID  :' + menusUUID + ' body:'+JSON.stringify(body,null,2));
             });
@@ -66,7 +63,7 @@ describe('menus Test Case:',()=>{
         it('success retrieve an menus  ', function () {
             //this.timeout(0);
 
-            return request.get(`${tenantURL}/menus/${menusUUID}`,{}).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/menus/${menusUUID}`,{}).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('menus test retrieve   :' + JSON.stringify(body));
 
@@ -83,14 +80,12 @@ describe('menus Test Case:',()=>{
            // menusUUID = '7O1PwyXNuUOEXxvRfvbyrQ';
             let updateInfo = {};
             updateInfo.number = '05';
-            return request.post(`${tenantURL}/menus/${menusUUID}`,updateInfo).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.post(`${tenantURL}/menus/${menusUUID}`,updateInfo).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('menus test update   :' + JSON.stringify(body));
 
                 expect(statusCode).to.equal(200);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
-                expect(body.description).to.equal(updateInfo.description);
-                //expect(uriReg.applicationURIReg.test(res.headers['location'])).to.be.true;
             });
         });
     });
@@ -109,7 +104,7 @@ describe('menus Test Case:',()=>{
                // orderBy:'uiOrder DESC',
 
             };
-            return request.get(`${url}/menuServer/api/v1/menus`,qs,options).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/menus`,qs,options).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('menus test list   :' + JSON.stringify(body,null,2));
 
@@ -126,7 +121,7 @@ describe('menus Test Case:',()=>{
               //  applicationHref:'http://localhost:5000/api/v1.0.0/applications/BQZNqVpEbFxyZ7ayW7x2yA',
              //   menuOrganizationHref : 'http://localhost:6001/api/v1.0.0/menuOrganizations/rIdUW07jGttn5VNGcPvnuQ',
             };
-            return request.get(`${url}/menuServer/api/v1/treeMenus`,qs,options).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.get(`${tenantURL}/treeMenus`,qs,options).then( ( { statusCode,body,headers,requestHelper} )=>{
 
                 console.log('menus test treeMenus   :' + JSON.stringify(body));
 
@@ -143,9 +138,9 @@ describe('menus Test Case:',()=>{
         it('success delete an menus', function () {
             //this.timeout(0);
 
-           /* return request.delete(`${tenantURL}/menus/${menusUUID}`).then( ( { statusCode,body,headers,request} )=>{
+            return requestHelper.delete(`${tenantURL}/menus/${menusUUID}`).then( ( { statusCode,body,headers,requestHelper} )=>{
                 expect(statusCode).to.equal(204);
-            });*/
+            });
         });
     });
 });
