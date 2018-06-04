@@ -39,6 +39,7 @@ app.use(bodyparser({jsonLimit: '10mb'}));
 // JWT
 app.use(async (ctx,next)=>{
     console.log('query:',ctx.query);
+
     let jwt_opt = { secret: config.jwt.public_key, algorithms: ['RS256'] ,passthrough:false};
     //优先使用Header头信息中的认证信息，若没有则使用query中的token
     if(!ctx.header.authorization){
@@ -49,16 +50,22 @@ app.use(async (ctx,next)=>{
 
     if(!ctx.query.token && !ctx.header.authorization)
     {
-        console.log(' no token in header and query!!!');
-        //await  next();
+        console.log(' no token in header and query!!!,path:',ctx.path);
 
-        let error = new Error();
-        error.name = 'no token';
-        error.code = 9999;
-        error.message = 'no token';
-        error.description = '';
-        ctx.status = 401;
-        ctx.body = error;
+        if(ctx.path.indexOf('graph') >= 0)
+        {
+            await  next();
+        }
+        else
+        {
+            let error = new Error();
+            error.name = 'no token';
+            error.code = 9999;
+            error.message = 'no token';
+            error.description = '';
+            ctx.status = 401;
+            ctx.body = error;
+        }
     }
     else
     {
@@ -76,6 +83,9 @@ app.use(async (ctx,next)=>{
             ctx.body = error;
         }
     }
+
+
+
 
 
 

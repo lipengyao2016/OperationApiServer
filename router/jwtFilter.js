@@ -87,6 +87,15 @@ var ResourceUrlParamMapTable= {
             },
         ],
     },
+
+    'checkAccount': {
+        addParams: [
+            {
+                key: 'merchantNumber',
+                upKey: ''
+            }
+        ],
+    },
 };
 
 
