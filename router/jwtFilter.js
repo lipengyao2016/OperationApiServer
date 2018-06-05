@@ -33,8 +33,6 @@ var ResourceUrlParamMapTable= {
         ],
     },
 
-
-
     'roles': {
         addParams: [
             {

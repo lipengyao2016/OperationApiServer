@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const devUtils = require('develop-utils');
 
 exports.makeArrayStr= function(objArray) {
     return objArray.map(item=>{
@@ -24,3 +25,11 @@ exports.parseArrayStr = function(objArrayStr) {
 
     return dataArray;
 }
+
+
+exports.convertHrefToUUID = function(Item) {
+
+    Item.uuid = devUtils.getLastResourceUUIDInURL(Item.href);
+    return Item;
+}
+

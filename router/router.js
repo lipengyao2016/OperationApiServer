@@ -5,7 +5,9 @@ const Router = require('koa-router');
 let router = new Router();
 const { graphqlKoa ,graphiqlKoa } = require('apollo-server-koa');
 //const   schema= require('./schema');
-const   schema= require('./graphSchema');
+//const   schema= require('./graphSchema');
+
+const   schema= require('../schemes/schemeIndex');
 
 /*const goodPackagesInterface = require('../controllers/interface/goodPackagesInterface');
 const goodsInterface = require('../controllers/interface/goodsInterface');*/

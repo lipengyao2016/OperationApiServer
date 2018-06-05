@@ -173,9 +173,6 @@ const menuGroupQueryType = new GraphQLInputObjectType({
         modifiedAt:{
             type: GraphQLString,
         },
-        orderBy:{
-            type: GraphQLString,
-        },
         upLevelMenuGroupUUID:{
             type: GraphQLList(GraphQLString),
         },
@@ -184,6 +181,9 @@ const menuGroupQueryType = new GraphQLInputObjectType({
         },
         limit: {
             type: GraphQLInt,
+        },
+        orderBy:{
+            type: GraphQLString,
         },
     }
 });
