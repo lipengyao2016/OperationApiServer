@@ -9,7 +9,7 @@ async function  getToken()
     let  body = {
         "applicationName": "LaiKoo-Platform",     // 系统名称, 莱客平台：'LaiKoo-Platform',
         // 莱客管家：'LaiKoo-Butler',莱客收银：'LaiKoo-CashRegister'
-        "merchantNumber": "900001",    // 商户编号
+        "merchantNumber": "999999",    // 商户编号
         "key": "liuzong",                 // 账户名、账号、手机号
         "value": new Buffer("888888").toString('base64')
     };
@@ -25,6 +25,8 @@ async function getOptions() {
         {
             "authorization": `Bearer ${token}`,
         };
+
+    console.log('getOptions-> token:' + token);
 
     let options = {
         headers: header,

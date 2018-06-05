@@ -17,6 +17,8 @@ exports.getUsers = async function (query,ctx) {
 
     let userRet = await request.get(userHref,query);
 
-    return userRet.body.items.map(Item=>strUtils.convertHrefToUUID(Item));
+     userRet.body.items.map(Item=>strUtils.convertHrefToUUID(Item));
+
+     return userRet.body;
 
 }

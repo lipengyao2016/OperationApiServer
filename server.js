@@ -52,7 +52,7 @@ app.use(async (ctx,next)=>{
     {
         console.log(' no token in header and query!!!,path:',ctx.path);
 
-        if(ctx.path.indexOf('graph') >= 0)
+        if(ctx.path.indexOf('graphiql') >= 0)
         {
             await  next();
         }

@@ -20,21 +20,45 @@ const extendFields = {
                 return await  roleApi.getUserCountByRoleUUID(parentData.uuid);
             }
         },
-
 };
 
 const outputData = {};
 _.extend(outputData,roleFileds, extendFields);
-exports.RoleType = new GraphQLObjectType({
+const RoleType = new GraphQLObjectType({
     name: 'role',
     fields: outputData
+});
+
+
+const RoleListType = new GraphQLObjectType({
+    name: 'roleList',
+    fields:
+        {
+            size:{
+                type: GraphQLInt,
+            },
+            offset:{
+                type: GraphQLInt,
+            },
+            limit:{
+                type: GraphQLInt,
+            },
+            items:{
+                type: new GraphQLList(RoleType),
+            }
+
+        },
 });
 
 
 
 const queryData = {};
 _.extend(queryData,roleFileds, queryFileds);
-exports.RoleQueryType = new GraphQLInputObjectType({
+const RoleQueryType = new GraphQLInputObjectType({
     name: 'roleQuery',
     fields: queryData,
 });
+
+exports.RoleType = RoleType;
+exports.RoleListType = RoleListType;
+exports.RoleQueryType = RoleQueryType;

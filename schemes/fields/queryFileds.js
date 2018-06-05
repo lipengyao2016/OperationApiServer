@@ -16,4 +16,10 @@ module.exports = {
     orderBy:{
         type: GraphQLString,
     },
+    applicationHref:{
+        type: GraphQLString,
+    },
+    merchantHref:{
+        type: GraphQLString,
+    },
 };

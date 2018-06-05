@@ -124,8 +124,6 @@ class JwtFilter{
 
     async filter(ctx){
 
-
-
         let url = ctx.url;
 
         let path = ctx.path;

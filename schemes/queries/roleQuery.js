@@ -7,7 +7,7 @@ var { graphql, buildSchema,GraphQLSchema, GraphQLObjectType,
 
 
 const  roleTypes  = require('../types/roleTypes');
-const RoleType = roleTypes.RoleType;
+const RoleListType = roleTypes.RoleListType;
 const RoleQueryType = roleTypes.RoleQueryType;
 
 const  roleApi  = require('../../controllers/interface/roleApi');
@@ -15,13 +15,24 @@ const  roleApi  = require('../../controllers/interface/roleApi');
 
 
 module.exports = {
-    type: new GraphQLList(RoleType),
+    type: RoleListType,
     args: {
         options: {
             type: RoleQueryType,
         },
     },
     async resolve (root, {options}, ctx) {
+
+         if(!options.merchantHref)
+         {
+             options.merchantHref = ctx.jwt.merchantHref;
+         }
+        if(!options.applicationHref)
+        {
+            options.applicationHref = ctx.jwt.applicationHref;
+        }
+
+
         return await  roleApi.listRoles(options,ctx);
     }
 }

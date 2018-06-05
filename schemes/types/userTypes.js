@@ -36,16 +36,44 @@ const extendFields = {
 const outputData = {};
 _.extend(outputData,userFileds, extendFields);
 
-exports.UserType = new GraphQLObjectType({
+
+const UserType = new GraphQLObjectType({
     name: 'user',
-    fields: outputData,
+    fields:outputData,
 });
+
+const UserListType = new GraphQLObjectType({
+    name: 'userList',
+    fields:
+        {
+            size:{
+                type: GraphQLInt,
+            },
+            offset:{
+                type: GraphQLInt,
+            },
+            limit:{
+                type: GraphQLInt,
+            },
+            items:{
+                 type: new GraphQLList(UserType),
+            }
+
+        },
+});
+
+
+
 
 const queryData = {};
 _.extend(queryData,userFileds, queryFileds);
 
 
-exports.UserQueryType = new GraphQLInputObjectType({
+const UserQueryType = new GraphQLInputObjectType({
     name: 'userQuery',
     fields: queryData,
 });
+
+exports.UserType = UserType;
+exports.UserQueryType = UserQueryType;
+exports.UserListType = UserListType;

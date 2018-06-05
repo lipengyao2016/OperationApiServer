@@ -7,7 +7,7 @@ var { graphql, buildSchema,GraphQLSchema, GraphQLObjectType,
 
 
 const  userTypes  = require('../types/userTypes');
-const UserType = userTypes.UserType;
+const UserListType = userTypes.UserListType;
 const UserQueryType = userTypes.UserQueryType;
 
 const  userApi  = require('../../controllers/interface/userApi');
@@ -15,13 +15,23 @@ const  userApi  = require('../../controllers/interface/userApi');
 
 
 module.exports = {
-    type: new GraphQLList(UserType),
+    type: UserListType,
     args: {
         options: {
             type: UserQueryType,
         },
     },
     async resolve (root, {options}, ctx) {
+
+        if(!options.merchantHref)
+        {
+            options.merchantHref = ctx.jwt.merchantHref;
+        }
+        if(!options.applicationHref)
+        {
+            options.applicationHref = ctx.jwt.applicationHref;
+        }
+
         return await  userApi.getUsers(options,ctx);
     }
 }

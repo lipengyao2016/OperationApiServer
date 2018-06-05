@@ -26,7 +26,8 @@ exports.listRoles = async function (query,ctx) {
 
     let roleRet = await request.get(roleHref,query);
 
-    return roleRet.body.items.map(Item=>strUtils.convertHrefToUUID(Item));
+     roleRet.body.items.map(Item=>strUtils.convertHrefToUUID(Item));
+     return roleRet.body;
 
 }
 
