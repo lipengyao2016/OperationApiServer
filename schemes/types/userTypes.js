@@ -1,18 +1,12 @@
 const _ = require('lodash');
 const  userFileds= require('../fields/userFileds');
 const  queryFileds= require('../fields/queryFileds');
-var { graphql, buildSchema,GraphQLSchema, GraphQLObjectType,
-    GraphQLEnumType,
-    GraphQLInterfaceType,
-    GraphQLList,
-    GraphQLNonNull,
-    GraphQLString,GraphQLInt,GraphQLInputObjectType} = require('graphql');
-
+const  listFileds= require('../fields/listFileds');
 const  accountTypes= require('./accountTypes');
 const  roleTypes= require('./roleTypes');
-
 const  accountApi= require('../../controllers/interface/accountApi');
 const  roleApi= require('../../controllers/interface/roleApi');
+var {GraphQLList} = require('graphql');
 
 const extendFields = {
         account:
@@ -33,47 +27,8 @@ const extendFields = {
             },
     };
 
-const outputData = {};
-_.extend(outputData,userFileds, extendFields);
 
+exports.UserType = listFileds.getResourceTypes('user',userFileds,extendFields);
+exports.UserListType = listFileds.getListTypes('userList',exports.UserType);
+exports.UserQueryType = queryFileds.getQueryType('userQuery',userFileds);
 
-const UserType = new GraphQLObjectType({
-    name: 'user',
-    fields:outputData,
-});
-
-const UserListType = new GraphQLObjectType({
-    name: 'userList',
-    fields:
-        {
-            size:{
-                type: GraphQLInt,
-            },
-            offset:{
-                type: GraphQLInt,
-            },
-            limit:{
-                type: GraphQLInt,
-            },
-            items:{
-                 type: new GraphQLList(UserType),
-            }
-
-        },
-});
-
-
-
-
-const queryData = {};
-_.extend(queryData,userFileds, queryFileds);
-
-
-const UserQueryType = new GraphQLInputObjectType({
-    name: 'userQuery',
-    fields: queryData,
-});
-
-exports.UserType = UserType;
-exports.UserQueryType = UserQueryType;
-exports.UserListType = UserListType;

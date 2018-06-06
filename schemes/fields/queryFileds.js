@@ -5,8 +5,10 @@ var { graphql, buildSchema,GraphQLSchema, GraphQLObjectType,
     GraphQLList,
     GraphQLNonNull,
     GraphQLString,GraphQLInt,GraphQLInputObjectType} = require('graphql');
+const _ = require('lodash');
 
-module.exports = {
+
+const queryFields = {
     offset: {
         type: GraphQLInt,
     },
@@ -23,3 +25,15 @@ module.exports = {
         type: GraphQLString,
     },
 };
+
+function getQueryType(queryName,baseFields) {
+
+    const queryData = {};
+    _.extend(queryData,queryFields, baseFields);
+    return new GraphQLInputObjectType({
+        name: queryName,
+        fields: queryData,
+    });
+}
+
+exports.getQueryType = getQueryType;

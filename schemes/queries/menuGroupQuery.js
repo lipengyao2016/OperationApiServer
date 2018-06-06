@@ -6,33 +6,30 @@ var { graphql, buildSchema,GraphQLSchema, GraphQLObjectType,
     GraphQLString,GraphQLInt,GraphQLInputObjectType} = require('graphql');
 
 
-const  userTypes  = require('../types/userTypes');
-const UserListType = userTypes.UserListType;
-const UserQueryType = userTypes.UserQueryType;
+const  menuGroupTypes  = require('../types/menuGroupTypes');
+const MenuGroupListType = menuGroupTypes.MenuGroupListType;
+const MenuGroupQueryType = menuGroupTypes.MenuGroupQueryType;
 
-const  userApi  = require('../../controllers/interface/userApi');
+const  menuGroupApi  = require('../../controllers/interface/menuGroupApi');
 
 
 
 module.exports = {
-    type: UserListType,
+    type: MenuGroupListType,
     args: {
         options: {
-            type: UserQueryType,
+            type: MenuGroupQueryType,
         },
     },
     async resolve (root, {options= {}}, ctx) {
 
-        if(!options.merchantHref)
-        {
-            options.merchantHref = ctx.jwt.merchantHref;
-        }
+
         if(!options.applicationHref)
         {
             options.applicationHref = ctx.jwt.applicationHref;
         }
 
-        return await  userApi.getUsers(options,ctx);
+        return await  menuGroupApi.listMenuGroups(options,ctx);
     }
 }
 

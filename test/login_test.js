@@ -31,12 +31,12 @@ describe('Login Test Case:',function () {
             let  body = {
                 "applicationName": "LaiKoo-Platform",     // 系统名称, 莱客平台：'LaiKoo-Platform',
                 // 莱客管家：'LaiKoo-Butler',莱客收银：'LaiKoo-CashRegister'
-                "merchantNumber": "900001",    // 商户编号
+                "merchantNumber": "999999",    // 商户编号
                 "key": "liuzong",                 // 账户名、账号、手机号
                 "value": new Buffer("888888").toString('base64')
             };
 
-            return request.post('http://192.168.7.26:6100/api/v1.0.0/login',body,options)
+            return request.post(`${url}/authServer/api/v1.0.0/login`,body)
                 .then(function ({statusCode,body,headers,request}) {
                     expect(statusCode).to.equal(200);
                     console.log('statusCode:',statusCode);

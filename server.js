@@ -40,24 +40,26 @@ app.use(bodyparser({jsonLimit: '10mb'}));
 app.use(async (ctx,next)=>{
     console.log('query:',ctx.query);
 
-    let jwt_opt = { secret: config.jwt.public_key, algorithms: ['RS256'] ,passthrough:false};
-    //优先使用Header头信息中的认证信息，若没有则使用query中的token
-    if(!ctx.header.authorization){
-        jwt_opt.getToken = function(){
-            return ctx.query.token;
-        };
-    }
-
-    if(!ctx.query.token && !ctx.header.authorization)
+    if(ctx.path.indexOf('graphiql') >= 0 || ctx.path.indexOf('authServer') >= 0 )
     {
-        console.log(' no token in header and query!!!,path:',ctx.path);
-
-        if(ctx.path.indexOf('graphiql') >= 0)
-        {
-            await  next();
+        console.log('jwt skip verify,, path:' + ctx.path);
+        await  next();
+    }
+    else
+    {
+        let jwt_opt = { secret: config.jwt.public_key, algorithms: ['RS256'] ,passthrough:false};
+        //优先使用Header头信息中的认证信息，若没有则使用query中的token
+        if(!ctx.header.authorization){
+            jwt_opt.getToken = function(){
+                return ctx.query.token;
+            };
         }
-        else
+
+        if(!ctx.query.token && !ctx.header.authorization)
         {
+            console.log(' no token in header and query!!!,path:',ctx.path);
+
+
             let error = new Error();
             error.name = 'no token';
             error.code = 9999;
@@ -65,29 +67,25 @@ app.use(async (ctx,next)=>{
             error.description = '';
             ctx.status = 401;
             ctx.body = error;
+
+        }
+        else
+        {
+            try {
+                await jwt(jwt_opt).call(null,ctx,next)/*.unless({ path: [/^\/authServer/] })*/;
+            }
+            catch (err){
+                console.error(' user jwt error :' + err);
+                let error = new Error();
+                error.name = err.name;
+                error.code = 9999;
+                error.message = err.message;
+                error.description = '';
+                ctx.status = 401;
+                ctx.body = error;
+            }
         }
     }
-    else
-    {
-        try {
-            await jwt(jwt_opt).call(null,ctx,next)/*.unless({ path: [/^\/authServer/] })*/;
-        }
-        catch (err){
-            console.error(' user jwt error :' + err);
-            let error = new Error();
-            error.name = err.name;
-            error.code = 9999;
-            error.message = err.message;
-            error.description = '';
-            ctx.status = 401;
-            ctx.body = error;
-        }
-    }
-
-
-
-
-
 
 });
 app.use(async (ctx,next)=>{

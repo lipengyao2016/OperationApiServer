@@ -21,7 +21,8 @@ module.exports = {
             type: RoleQueryType,
         },
     },
-    async resolve (root, {options}, ctx) {
+    async resolve (root, {options= {}}, ctx) {
+
 
          if(!options.merchantHref)
          {
@@ -31,7 +32,6 @@ module.exports = {
         {
             options.applicationHref = ctx.jwt.applicationHref;
         }
-
 
         return await  roleApi.listRoles(options,ctx);
     }
