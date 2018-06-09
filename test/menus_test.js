@@ -95,7 +95,7 @@ describe('menus Test Case:',()=>{
         it('list menus  ', function () {
             //this.timeout(0);
             let qs = {
-                name:'*插件*',
+               // name:'*插件*',
                 //uuid:['3UCHOeNl5tVmN83fkyQfNQ','V1bg0v8SlXKs8OXApykNzg'],
                 /*               offset:0,
                                limit:1,

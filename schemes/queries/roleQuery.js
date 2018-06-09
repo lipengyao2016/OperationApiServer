@@ -24,14 +24,14 @@ module.exports = {
     async resolve (root, {options= {}}, ctx) {
 
 
-         if(!options.merchantHref)
+         if(!options.ownerHref)
          {
-             options.merchantHref = ctx.jwt.merchantHref;
+             options.ownerHref = ctx.jwt.merchantHref;
          }
-        if(!options.applicationHref)
+      /*  if(!options.applicationHref)
         {
             options.applicationHref = ctx.jwt.applicationHref;
-        }
+        }*/
 
         return await  roleApi.listRoles(options,ctx);
     }

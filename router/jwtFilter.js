@@ -32,16 +32,21 @@ var ResourceUrlParamMapTable= {
             }
         ],
     },
-
-    'roles': {
+    'metaMenus': {
         addParams: [
             {
                 key: 'applicationHref',
                 upKey: ''
-            },
+            }
+        ],
+    },
+
+    'roles': {
+        addParams: [
             {
                 key: 'merchantHref',
-                upKey: ''
+                upKey: '',
+                destKey:'ownerHref',
             }
         ],
     },
@@ -115,9 +120,11 @@ class JwtFilter{
 
             let key = param.key;
 
-           if(!data[key])
+            let destKey = param.destKey ? param.destKey : key;
+
+           if(!data[destKey])
            {
-               data[key] = srcData[key];
+               data[destKey] = srcData[key];
            }
         });
     }
