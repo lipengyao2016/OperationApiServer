@@ -83,7 +83,19 @@ let config = {
         port: 6100
     },
 
-    ThirdServerByCommonConfig: ['userServer','roleServer','accountServer','menuServer','merchantServer','platformBusiServer','authServer'],
+
+    shopBusiServer:{
+        host: externHost,
+        port: 6102
+    },
+
+    shopServer:{
+        host: externHost,
+        port: 6005
+    },
+
+    ThirdServerByCommonConfig: ['userServer','roleServer','accountServer','menuServer'
+        ,'merchantServer','platformBusiServer','authServer','shopBusiServer','shopServer'],
 
     serverIndexs:
         {
@@ -94,6 +106,8 @@ let config = {
             Merchant_Server:  4,
             PlatformBusi_Server:  5,
             auth_Server:  6,
+            shopBusi_Server:  7,
+            shop_Server:  8,
         },
 
     cache : {
@@ -115,6 +129,9 @@ try {
             config[key].host=ThirdServer_domain;
             console.log('server:' + key + ',host:' + config[key].host + ',port:' + config[key].port);
         } );
+
+       // config['authServer'].host = '192.168.7.5';
+
     }
     if( knex_connection && config.knex.connection ){
         Object.keys(knex_connection).map(key=>{

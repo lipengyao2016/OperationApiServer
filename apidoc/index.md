@@ -49,6 +49,18 @@ RESTApi资源是指透传原有的REST风格接口，做智能路由，只需要
         port: 6101
     },
 
+    authServer:{
+        port: 6100
+    },
+
+    shopBusiServer:{
+        port: 6102
+    },
+
+    shopServer:{
+        port: 6005
+    }
+
 ###1.举例.
 
 http://localhost:6200/roleServer/api/v1.0.0/roles/GUu4Zz0788NughRrzYh7dw
