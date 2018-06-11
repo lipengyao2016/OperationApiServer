@@ -39,9 +39,9 @@ const qs = require('querystring');
 
 app.use(async (ctx,next)=>{
     if(ctx.method == 'POST' || ctx.method == 'PUT'){
-        console.log(`body:\n${JSON.stringify(ctx.request.body,null,2)}`);
+        console.log(`first koa -->body:\n${JSON.stringify(ctx.request.body,null,2)}`);
     }
-    else if(ctx.method == 'GET')
+    else if(ctx.method == 'GET' || ctx.method == 'DELETE')
     {
         console.log(`query:\n${JSON.stringify(ctx.query,null,2)}`);
     }
