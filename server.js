@@ -43,7 +43,7 @@ app.use(async (ctx,next)=>{
     }
     else if(ctx.method == 'GET' || ctx.method == 'DELETE')
     {
-        console.log(`query:\n${JSON.stringify(ctx.query,null,2)}`);
+        console.log(`first koa -->query:\n${JSON.stringify(ctx.query,null,2)}`);
     }
     await next();
 });
