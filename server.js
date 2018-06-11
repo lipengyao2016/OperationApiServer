@@ -18,7 +18,12 @@ const Koa = require('koa');
 const logger = require('koa-logger');
 const bodyparser = require('koa-bodyparser');
 
-const app = new Koa();
+//const app = new Koa();
+const appKoa = new Koa();
+const app =require('koa-qs')(appKoa, 'extended');
+
+
+
 const jsonExpand = require('koa-json-url-expand');
 const jwt = require('koa-jwt');
 const _  =require('lodash');
@@ -31,6 +36,18 @@ const resourceURI = require('./controllers/resource/resourceURI');
 const URIParser = resourceURI.v1;
 const jwtFilter = require('./router/jwtFilter');
 const qs = require('querystring');
+
+app.use(async (ctx,next)=>{
+    if(ctx.method == 'POST' || ctx.method == 'PUT'){
+        console.log(`body:\n${JSON.stringify(ctx.request.body,null,2)}`);
+    }
+    else if(ctx.method == 'GET')
+    {
+        console.log(`query:\n${JSON.stringify(ctx.query,null,2)}`);
+    }
+    await next();
+});
+
 
 app.use(logger());
 app.use(bodyparser({jsonLimit: '10mb'}));

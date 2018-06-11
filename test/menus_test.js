@@ -135,12 +135,21 @@ describe('menus Test Case:',()=>{
     });
 
     describe('delete test case:',()=>{
-        it('success delete an menus', function () {
+       /* it('success delete an menus', function () {
             //this.timeout(0);
 
             return requestHelper.delete(`${tenantURL}/menus/${menusUUID}`).then( ( { statusCode,body,headers,requestHelper} )=>{
                 expect(statusCode).to.equal(204);
             });
+        });*/
+
+        it('success batchDelete an menus', function () {
+            //this.timeout(0);
+
+            return requestHelper.delete(`${tenantURL}/menus/batchDelete`,{uuid:['8KdDL56QDf1tuK3E6rH3Mg','gSWYc46G8tqEYYiZ9842hA']}).then( ( { statusCode,body,headers,request} )=>{
+                expect(statusCode).to.equal(204);
+            });
         });
+
     });
 });
