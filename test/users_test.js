@@ -57,13 +57,13 @@ describe('users Test Case:',()=>{
             //this.timeout(0);
             let  data = {
                 user:{
-                    name: 'wensu22',
-                    email: 'wensu22@sina.com',
+                    name: 'wensu33',
+                    email: 'wensu33@sina.com',
                     roleHref:'http://192.168.7.26:6002/api/v1.0.0/roles/drxoJWYKGWcO68I0QSKxIQ',
                 },
                 account:
                     {
-                        "name": "wensu22",          // 账户名
+                        "name": "wensu33",          // 账户名
                         "password": new Buffer("888888").toString('base64'),
                     }
             };

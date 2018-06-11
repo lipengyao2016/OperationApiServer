@@ -70,12 +70,9 @@ var ResourceUrlParamMapTable= {
     'registerUser': {
         addParams: [
             {
-                key: 'applicationHref',
-                upKey: 'user'
-            },
-            {
                 key: 'merchantHref',
-                upKey: 'user'
+                upKey: 'user',
+                destKey:'ownerHref',
             },
             {
                 key: 'applicationName',
