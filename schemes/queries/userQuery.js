@@ -23,13 +23,9 @@ module.exports = {
     },
     async resolve (root, {options= {}}, ctx) {
 
-        if(!options.merchantHref)
+        if(!options.ownerHref)
         {
-            options.merchantHref = ctx.jwt.merchantHref;
-        }
-        if(!options.applicationHref)
-        {
-            options.applicationHref = ctx.jwt.applicationHref;
+            options.ownerHref = ctx.jwt.merchantHref;
         }
 
         return await  userApi.getUsers(options,ctx);

@@ -53,12 +53,9 @@ var ResourceUrlParamMapTable= {
     'users': {
         addParams: [
             {
-                key: 'applicationHref',
-                upKey: ''
-            },
-            {
                 key: 'merchantHref',
-                upKey: ''
+                upKey: '',
+                destKey:'ownerHref',
             }
         ],
     },
