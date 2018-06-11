@@ -18,8 +18,8 @@ describe('menus Test Case:',()=>{
         name: '插件管理qq',
         menuId: '64D05948-36AD-41A0-AF78-75FA23D657C1',
         uiOrder:4,
-        // menuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/6cVizWBnkIRlGHCttOmspg',
 
+        // menuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/6cVizWBnkIRlGHCttOmspg',
         // applicationHref:'http://localhost:5000/api/v1.0.0/applications/CQZNqVpEbFxyZ7ayW7x2yA',
 
          operators:[
@@ -49,7 +49,8 @@ describe('menus Test Case:',()=>{
         it('success create an menus',  ()=> {
             //this.timeout(0);
 
-            return requestHelper.post(`${tenantURL}/menus`,menusTestCase,options).then( ( {statusCode, body, headers, requestHelper} )=>{
+            return requestHelper.post(`${tenantURL}/menus`,{}/*menusTestCase*/,options).then( ( {statusCode, body, headers, requestHelper} )=>{
+
                 expect(statusCode).to.equal(201);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
 

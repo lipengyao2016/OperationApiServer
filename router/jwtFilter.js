@@ -121,6 +121,7 @@ class JwtFilter{
                data[destKey] = srcData[key];
            }
         });
+        return obj;
     }
 
     async filter(ctx){
@@ -170,9 +171,14 @@ class JwtFilter{
             }
             else if(ctx.method == 'GET')
             {
+                if(_.isEmpty(ctx.query))
+                {
+                    ctx.query = {};
+                }
+
                 console.log(`jwt filter prev query:\n${JSON.stringify(ctx.query,null,2)}`);
 
-                this.addAttrIfNotExist(ctx.query,addParams,ctx.jwt);
+                ctx.query = this.addAttrIfNotExist(ctx.query,addParams,ctx.jwt);
             }
         }
 
