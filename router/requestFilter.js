@@ -59,6 +59,18 @@ var ResourceUrlParamMapTable= {
             },
         ],
     },
+    'menus': {
+        convertParams: [
+            {
+                key: 'applicationName',
+                func: convertApplicationNameToHref,
+            },
+            {
+                key: 'ownerUUIDAndType',
+                func: convertOwnerUUIDToHref,
+            },
+        ],
+    },
     'treeMenus': {
         convertParams: [
             {
