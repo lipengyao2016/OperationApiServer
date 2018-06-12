@@ -41,6 +41,15 @@ var ResourceUrlParamMapTable= {
         ],
     },
 
+    'unAllocatedMetaMenus': {
+        addParams: [
+            {
+                key: 'applicationHref',
+                upKey: ''
+            }
+        ],
+    },
+
     'roles': {
         addParams: [
             {
