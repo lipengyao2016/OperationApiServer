@@ -12,12 +12,16 @@ let options = {};
 
 describe('menuGroup Test Case:',()=>{
     let menuGroupTestCase = {
-        name: '测试管理pp',
+        name: '测试管理rrr',
         description: 'datagg',
         uiOrder: 3,
       //  upLevelMenuGroupHref:'http://localhost:6001/api/v1.0.0/menuGroups/eTUA8Knx9e0OMumDevYQ7g',
       //  menuOrganizationHref: 'http://localhost:6001/api/v1.0.0/menuOrganizations/PMM7M1sFnSTlDalZXqvPmQ',
        // applicationHref:'http://localhost:5000/api/v1.0.0/applications/BQZNqVpEbFxyZ7ayW7x2yA',
+
+        ownerType:'businessFormat',
+        ownerUUID:'ESQmj0c7OkWXYclyPxhU7w',
+        applicationName:'LaiKoo-Platform',
     };
     let applicationUUID = 'AppUUIDForTestCase';
     let menuGroupUUID = null;
@@ -42,10 +46,9 @@ describe('menuGroup Test Case:',()=>{
 
                     console.log('menuGroups test  create   menuGroupUUID:'+menuGroupUUID);
                 });
-
-
-
         });
+
+
     });
     describe('retrieve test case:', function () {
         it('success retrieve an menuGroup  ', function () {
@@ -84,7 +87,11 @@ describe('menuGroup Test Case:',()=>{
         it('list menuGroups  ', function () {
             //this.timeout(0);
             let qs = {
-                name:'*测试管理*',
+
+                ownerType:'businessFormat',
+                ownerUUID:'ESQmj0c7OkWXYclyPxhU7w',
+                applicationName:'LaiKoo-Platform',
+               // name:'*测试管理*',
                 //uuid:['3UCHOeNl5tVmN83fkyQfNQ','V1bg0v8SlXKs8OXApykNzg'],
                 /*               offset:0,
                                limit:1,

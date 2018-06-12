@@ -37,6 +37,8 @@ const URIParser = resourceURI.v1;
 const jwtFilter = require('./router/jwtFilter');
 const qs = require('querystring');
 
+const requestFilter = require('./router/requestFilter');
+
 app.use(async (ctx,next)=>{
     if(ctx.method == 'POST' || ctx.method == 'PUT'){
         console.log(`first koa -->body:\n${JSON.stringify(ctx.request.body,null,2)}`);
@@ -128,8 +130,7 @@ app.use(async (ctx,next)=>{
         ctx.jwt.merchantNumber = merchant.number;
         console.log(`merchant: ${ctx.jwt.merchantUUID} , user: ${ctx.jwt.userUUID}`);
 
-        await  jwtFilter.filter(ctx);
-        console.log('jwtFilter->filter end.');
+
 
     }
 
@@ -137,6 +138,13 @@ app.use(async (ctx,next)=>{
 });
 
 app.use(async (ctx,next)=>{
+
+    await  jwtFilter.filter(ctx);
+    console.log('jwtFilter->filter end.');
+
+    await  requestFilter.filter(ctx);
+    console.log('requestFilter->filter end.');
+
     if(ctx.method == 'POST' || ctx.method == 'PUT'){
         console.log(`body:\n${JSON.stringify(ctx.request.body,null,2)}`);
     }

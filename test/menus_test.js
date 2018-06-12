@@ -121,6 +121,11 @@ describe('menus Test Case:',()=>{
             let qs = {
               //  applicationHref:'http://localhost:5000/api/v1.0.0/applications/BQZNqVpEbFxyZ7ayW7x2yA',
              //   menuOrganizationHref : 'http://localhost:6001/api/v1.0.0/menuOrganizations/rIdUW07jGttn5VNGcPvnuQ',
+
+                ownerType:'businessFormat',
+                ownerUUID:'ESQmj0c7OkWXYclyPxhU7w',
+                // applicationName:'LaiKoo-Platform',
+                applicationName:'LaiKoo',
             };
             return requestHelper.get(`${tenantURL}/treeMenus`,qs,options).then( ( { statusCode,body,headers,requestHelper} )=>{
 
@@ -128,6 +133,45 @@ describe('menus Test Case:',()=>{
 
                 expect(statusCode).to.equal(200);
                 expect(headers['content-type']).to.equal('application/json; charset=utf-8');
+            });
+        });
+
+
+
+        it('list metaMenus  ', function () {
+            //this.timeout(0);
+            let qs = {
+                //applicationHref:'http://localhost:5000/api/v1.0.0/applications/CQZNqVpEbFxyZ7ayW7x2yA',
+                applicationName:'LaiKoo-Platform',
+
+
+            };
+            return requestHelper.get(`${tenantURL}/metaMenus`,qs).then( ( { statusCode,body,headers,request} )=>{
+
+                console.log('metaMenus test platformbusiserver list   :' + JSON.stringify(body,null,2));
+
+                expect(statusCode).to.equal(200);
+                expect(headers['content-type']).to.equal('application/json; charset=utf-8');
+                //expect(uriReg.applicationURIReg.test(res.headers['location'])).to.be.true;
+            });
+        });
+
+        it('list unAllocatedMetaMenus  ', function () {
+            //this.timeout(0);
+            let qs = {
+                //applicationHref:'http://localhost:5000/api/v1.0.0/applications/CQZNqVpEbFxyZ7ayW7x2yA',
+                applicationName:'LaiKoo-Platform',
+                ownerType:'businessFormat',
+                ownerUUID:'ESQmj0c7OkWXYclyPxhU7w',
+
+            };
+            return requestHelper.get(`${tenantURL}/unAllocatedMetaMenus`,qs).then( ( { statusCode,body,headers,request} )=>{
+
+                console.log('metaMenus test platformbusiserver list   :' + JSON.stringify(body,null,2));
+
+                expect(statusCode).to.equal(200);
+                expect(headers['content-type']).to.equal('application/json; charset=utf-8');
+                //expect(uriReg.applicationURIReg.test(res.headers['location'])).to.be.true;
             });
         });
 
