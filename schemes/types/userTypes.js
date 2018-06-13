@@ -19,10 +19,10 @@ const extendFields = {
             },
         role:
             {
-                type: GraphQLList(roleTypes.RoleType),
+                type: roleTypes.RoleListType,
                 resolve:  async (parentData,args,ctx,d)=>
                 {
-                    return await  roleApi.getRolesByUserRoles(parentData.userRoleMemberShips.href);
+                    return await  roleApi.getRolesByUserRoles(/*parentData.userRoleMemberShips.href*/ parentData.href);
                 }
             },
     };

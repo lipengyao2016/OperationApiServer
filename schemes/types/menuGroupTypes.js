@@ -16,7 +16,7 @@ const extendFields = {
             },
             resolve:  async (parentData,{options = {}},ctx,d)=>
             {
-                return await  menuApi.getMenusByGroups(parentData.menus.href,options);
+                return await  menuApi.getMenusByGroups(parentData.href,options);
             }
         },
 };

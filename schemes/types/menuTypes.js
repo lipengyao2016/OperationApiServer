@@ -16,7 +16,7 @@ const extendFields = {
             },
             resolve:  async (parentData,{options = {}},ctx,d)=>
             {
-                return await  operatorApi.getOperatorsByMenus(parentData.operators.href,options);
+                return await  operatorApi.getOperatorsByMenus(parentData.href,options);
             }
         },
 };

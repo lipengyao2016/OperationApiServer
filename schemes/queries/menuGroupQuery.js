@@ -23,7 +23,6 @@ module.exports = {
     },
     async resolve (root, {options= {}}, ctx) {
 
-
         if(!options.applicationHref)
         {
             options.applicationHref = ctx.jwt.applicationHref;
