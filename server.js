@@ -59,7 +59,7 @@ app.use(bodyparser({jsonLimit: '10mb'}));
 app.use(async (ctx,next)=>{
     console.log('query:',ctx.query);
 
-    if(ctx.path.indexOf('graphiql') >= 0 || ctx.path.indexOf('authServer') >= 0 )
+    if(ctx.path.indexOf('graphiql') >= 0 || ctx.path.indexOf('authServer') >= 0  || ctx.path.indexOf('addressServer') >= 0 )
     {
         console.log('jwt skip verify,, path:' + ctx.path);
         await  next();
@@ -129,8 +129,6 @@ app.use(async (ctx,next)=>{
         ctx.jwt.applicationName = application.name;
         ctx.jwt.merchantNumber = merchant.number;
         console.log(`merchant: ${ctx.jwt.merchantUUID} , user: ${ctx.jwt.userUUID}`);
-
-
 
     }
 

@@ -40,5 +40,10 @@ function foo() {
     console.error('foo');
 }
 
+function koo() {
+    console.error('koo');
+}
+
 process.nextTick(foo);
+koo();
 console.error('bar');

@@ -94,8 +94,13 @@ let config = {
         port: 6005
     },
 
+    addressServer:{
+        host: externHost,
+        port: 6501
+    },
+
     ThirdServerByCommonConfig: ['userServer','roleServer','accountServer','menuServer'
-        ,'merchantServer','platformBusiServer','authServer','shopBusiServer','shopServer'],
+        ,'merchantServer','platformBusiServer','authServer','shopBusiServer','shopServer','addressServer'],
 
     serverIndexs:
         {
@@ -108,6 +113,7 @@ let config = {
             auth_Server:  6,
             shopBusi_Server:  7,
             shop_Server:  8,
+            address_Server:  9,
         },
 
     cache : {

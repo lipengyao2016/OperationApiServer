@@ -59,7 +59,11 @@ RESTApi资源是指透传原有的REST风格接口，做智能路由，只需要
 
     shopServer:{
         port: 6005
-    }
+    },
+
+     addressServer:{
+            port: 6501
+      }
 
 ###1.举例.
 
