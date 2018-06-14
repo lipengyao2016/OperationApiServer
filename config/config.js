@@ -99,8 +99,13 @@ let config = {
         port: 6501
     },
 
+    resourceServer:{
+        host: externHost,
+        port: 6502
+    },
+
     ThirdServerByCommonConfig: ['userServer','roleServer','accountServer','menuServer'
-        ,'merchantServer','platformBusiServer','authServer','shopBusiServer','shopServer','addressServer'],
+        ,'merchantServer','platformBusiServer','authServer','shopBusiServer','shopServer','addressServer','resourceServer'],
 
     serverIndexs:
         {
@@ -114,6 +119,7 @@ let config = {
             shopBusi_Server:  7,
             shop_Server:  8,
             address_Server:  9,
+            resource_Server:  10,
         },
 
     cache : {

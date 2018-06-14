@@ -59,7 +59,8 @@ app.use(bodyparser({jsonLimit: '10mb'}));
 app.use(async (ctx,next)=>{
     console.log('query:',ctx.query);
 
-    if(ctx.path.indexOf('graphiql') >= 0 || ctx.path.indexOf('authServer') >= 0  || ctx.path.indexOf('addressServer') >= 0 )
+    if(ctx.path.indexOf('graphiql') >= 0 || ctx.path.indexOf('authServer') >= 0
+        || ctx.path.indexOf('addressServer') >= 0  || ctx.path.indexOf('resourceServer') >= 0 )
     {
         console.log('jwt skip verify,, path:' + ctx.path);
         await  next();
